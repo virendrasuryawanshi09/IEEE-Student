@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About | IEEE DYP Student Branch</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        min-height: 100vh;
+        text-align: left;
+        background:
+          linear-gradient(135deg, rgba(0, 98, 155, 0.7), rgba(0, 98, 155, 0.8)),
+          url('../assets/dyp_outer.jpg');
+        background-size: cover;
+        background-position: center;
+        padding-top: 80px;
+      }
+      
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 1rem 4rem;
+        background: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+      
+      nav .logo {
+        height: 50px;
+        width: auto;
+      }
+      
+      nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 20px;
+      }
+      
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+      
+      nav ul li a:hover {
+        color: #00c3ff;
+      }
+      
+      .container {
+        max-width: 70%;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      }
+      
+      h2 {
+        font-size: 2rem;
+        color: #004a7c;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      
+      p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: #fff;
+        margin-bottom: 1.2rem;
+      }
+
+      /* Mobile Menu Toggle */
+      .menu-toggle {
+          display: none;
+          cursor: pointer;
+          color: white;
+          font-size: 1.5rem;
+      }
+          /* Footer Styles */
+    .site-footer {
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+  }
+  
+  .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+  }
+
+      /* Responsive Styles */
+      @media (max-width: 992px) {
+          .container {
+              max-width: 85%;
+          }
+      }
+
+      @media (max-width: 768px) {
+          nav {
+              padding: 1rem 2rem;
+          }
+          
+          .container {
+              max-width: 90%;
+              padding: 1.5rem;
+          }
+          
+          /* Mobile menu styles */
+          .menu-toggle {
+              display: block;
+          }
+          
+          nav ul {
+              display: none;
+              position: absolute;
+              top: 100%;
+              left: 0;
+              width: 100%;
+              background: rgba(0, 0, 0, 0.6);
+              flex-direction: column;
+              align-items: center;
+              padding: 1rem 0;
+              gap: 0;
+          }
+          
+          nav ul.show {
+              display: flex;
+          }
+          
+          nav ul li {
+              width: 100%;
+              text-align: center;
+          }
+          
+          nav ul li a {
+              display: block;
+              padding: 0.8rem;
+          }
+      }
+
+      @media (max-width: 480px) {
+          nav {
+              padding: 0.8rem 1rem;
+          }
+          
+          nav .logo {
+              height: 40px;
+          }
+          
+          .container {
+              max-width: 95%;
+              padding: 1.2rem;
+          }
+          
+          h2 {
+              font-size: 1.7rem;
+          }
+          
+          p {
+              font-size: 1rem;
+          }
+      }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <img src="../assets/logo.png" class="logo" alt="IEEE DYP Logo">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="navMenu">
+      <li><a href="../main.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="contact.html">Contact us</a></li>
+    </ul>
+  </nav>
+
+  <!-- Introduction Section -->
+  <div class="container">
+    <h2>About IEEE Student Branch</h2>
+    <p>
+      IEEE D.Y. Patil College of Engineering and Technology, Kolhapur Student Branch is a student organization nurturing budding engineers and 
+      providing them a platform to innovate, learn, and lead. IEEE DYPCOE Student branch is a student organization nurturing the budding students and providing them a 
+      platform to excel.
+    </p>
+    <p>
+     An IEEE Student Branch provides opportunities to meet and learn from fellow IEEE Student and Graduate Student Members and engage with professional 
+      IEEE members locally. An active IEEE Student Branch can be one of the most positive elements of your academic career, offering programs, activities, and professional 
+      networking opportunities that build critical skills outside of the classroom.
+      IEEE currently has Student Branches at thousands of universities and colleges in hundreds of countries throughout the world. An IEEE Student Branch gives students a community of peers, and a connection to faculty and industry professionals who drive innovation in countless technical fields.
+    </p>
+    <p>
+      Student involvement in Branch activities, whether special projects, social and technical meetings, outreach programs, conferences, local Section or Regional opportunities, etc. can help develop a record of accomplishment and capabilities beyond the norm.
+    </p>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-container">
+        <p>&copy; <span id="year"></span> IEEE DYP Student Branch. All Rights Reserved.</p>
+    </div>
+    </footer>
+
+    <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('show');
+    }
+  </script>
+
+</body>
+</html>

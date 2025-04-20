@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team - IEEE DYP Student Branch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00629b;
+            --secondary-color: #00c3ff;
+            --dark-color: #0a192f;
+            --light-color: #f8f9fa;
+            --overlay-dark: rgba(0, 0, 0, 0.7);
+            --overlay-light: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', 'Arial', sans-serif;
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, rgba(0, 98, 155, 0.8), rgba(0, 98, 155, 0.9)),
+                url('../assets/Background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1rem 2rem; /* Reduced padding to fit screen */
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-sizing: border-box; /* Prevent overflow */
+        }
+      
+        .logo {
+            height: 50px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+           color: #00c3ff;
+        }
+        /* Mobile Navigation */
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            color: var(--secondary-color);
+        }
+
+        #mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: var(--overlay-dark);
+            position: absolute;
+            top: 70px;
+            right: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        #mobile-menu a {
+            display: block;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            width: 100%;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        #mobile-menu a:hover {
+            background-color: var(--overlay-light);
+            color: var(--secondary-color);
+        }
+
+        @media only screen and (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            #mobile-menu.show {
+                display: flex;
+            }
+        }
+
+        /* Header */
+        header {
+            color: white;
+            width: 100%;
+            padding: 25px 0;
+            font-size: 2rem;
+            text-align: center;
+            margin-top: 80px;
+            /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);*/
+            position: relative;
+            z-index: 10;
+        }
+
+        header::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 10px auto;
+            border-radius: 3px;
+        }
+
+        /* Main Content */
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            background-color: var(--overlay-dark);
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--overlay-light);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--secondary-color);
+        }
+
+        .team-member img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .team-member:hover img {
+            transform: scale(1.05);
+            border-color: white;
+        }
+
+        .team-member .name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .team-member .role {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .team-member .role::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            bottom: -5px;
+            left: 25%;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+            /* Footer Styles */
+    .site-footer {
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+        margin-top: 2rem;
+        font-size: 0.9rem;
+    }
+    
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            header {
+                font-size: 1.5rem;
+                margin-top: 70px;
+                padding: 20px 0;
+            }
+
+            .team-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 30px 15px;
+            }
+
+            .team-member img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .team-member .name {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            header {
+                font-size: 1.3rem;
+            }
+
+            .team-container {
+                grid-template-columns: 1fr;
+                padding: 20px 10px;
+            }
+
+            .team-member {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <img src="../assets/logo.png" class="logo" alt="IEEE DYP Logo">
+        <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+        <ul>
+            <li><a href="../main.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">
+        <a href="../main.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact us</a>
+    </div>
+
+    
+  <!-- Faculty Section -->
+  <header>Faculty</header>
+  <div class="team-container">
+    <div class="team-member">
+      <img src="team-member1.jpg" alt="Dr. Santosh Chede" />
+      <div class="name">Dr. Santosh Chede</div>
+      <div class="role">Faculty Member</div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="team-member">
+      <img src="faculty2.jpg" alt="Dr. Manisha Bhanuse" />
+      <div class="name">Dr. Manisha Bhanuse</div>
+      <div class="role">Faculty Member</div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
+    <div class="team-member">
+      <img src="faculty3.jpg" alt="Dr. Santosh Bhopal" />
+      <div class="name">Dr. Santosh Bhopale</div>
+      <div class="role">Faculty Member</div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+  <header>
+    Core Team
+</header>
+    <!-- Main Content -->
+    <div class="team-container">
+        <!-- Team Member 1 -->
+        <div class="team-member">
+            <img src="faculty2.jpg" alt="Dr. Manisha Bhanuse" />
+            <div class="name">Dr. Manisha Bhanuse</div>
+            <div class="role">Faculty Counsellor</div>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <!-- Team Member 2 -->
+        <div class="team-member">
+            <img src="team-member2.jpg" alt="Padmanish Patil">
+            <div class="name">Padmanish Patil</div>
+            <div class="role">Chair</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="team-member">
+            <img src="team-member3.jpg" alt="Akshay Talwekar">
+            <div class="name">Akshay Talwekar</div>
+            <div class="role">Secretary</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="team-member">
+            <img src="team-member4.jpg" alt="Shoyab Shaikh">
+            <div class="name">Shoyab Shaikh</div>
+            <div class="role">Joint Secretary</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 5 -->
+        <div class="team-member">
+            <img src="team-member5.jpg" alt="Diksha Patil">
+            <div class="name">Diksha Patil</div>
+            <div class="role">Vice Chair</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 6 -->
+        <div class="team-member">
+            <img src="" alt="Virendra Suryawanshi">
+            <div class="name">Virendra Suryawanshi</div>
+            <div class="role">Webmaster</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 7 -->
+        <div class="team-member">
+            <img src="team-member7.jpg" alt="Mukta Tamhankar">
+            <div class="name">Mukta Tamhankar</div>
+            <div class="role">Treasurer</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 8 -->
+        <div class="team-member">
+            <img src="team-member8.jpg" alt="Tufailahamad Sayyad">
+            <div class="name">Tufailahamad Sayyad</div>
+            <div class="role">Joint Treasurer</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Team Member 9 -->
+        <div class="team-member">
+            <img src="team-member9.jpg" alt="Sanika Patil">
+            <div class="name">Sanika Patil</div>
+            <div class="role">Social Media Coordinator</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <p>&copy; <span id="year"></span> IEEE DYP Student Branch. All Rights Reserved.</p>
+        </div>
+        </footer>
+    
+        <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+    <script>
+        function toggleMenu() {
+            document.getElementById("mobile-menu").classList.toggle("show");
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (!menuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.remove('show');
+            }
+        });
+    </script>
+
+</body>
+</html>
