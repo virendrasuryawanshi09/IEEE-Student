@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | IEEE DYP Student Branch</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      min-height: 100vh;
+      text-align: left;
+      background:
+        linear-gradient(135deg, rgba(0, 98, 155, 0.7), rgba(0, 98, 155, 0.8)),
+        url('../assets/dyp_outer.jpg');
+      background-size: cover;
+      background-position: center;
+      padding-top: 80px;
+      color: white;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1rem 4rem;
+      background: rgba(0, 0, 0, 0.6);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    
+    nav .logo {
+      height: 50px;
+      width: auto;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+      color: #00c3ff;
+    }
+    
+    .container {
+      max-width: 90%;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+    }
+    
+    h2 {
+      font-size: 2rem;
+      color: #00c3ff;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      transform: scaleX(0.7);
+    }
+
+    /* Events Section Styles */
+    .events-section {
+      padding: 1rem 0;
+      position: relative;
+    }
+
+    .events-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 1rem 0;
+    }
+
+    .events-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      animation: scroll 40s linear infinite;
+      padding: 1rem 0;
+      will-change: transform;
+    }
+
+    .event-card {
+        width: 90vw; /* takes major width */
+        max-width: 900px;
+        max-height: 900px;
+        margin: 0 auto;
+        background: transparent; /* removed black bg */
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+    }
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 195, 255, 0.3);
+      border-color: #00c3ff;
+    }
+
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #00c3ff);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .event-card:hover::before {
+      opacity: 1;
+    }
+
+    .event-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      
+      .event-image img {
+        width: 100%;
+        height: auto;
+        object-fit: contain; /* Important: show entire image without cutting */
+      }
+
+    .event-card:hover .event-image img {
+      transform: scale(1.08);
+    }
+
+    .event-content {
+      padding: 2rem;
+    }
+
+    .event-content h3 {
+        font-size: 2rem;
+      margin: 0 0 0.8rem 0;
+      font-size: 1.3rem;
+      color: #00c3ff;
+      font-weight: 600;
+    }
+
+    .event-date {
+      margin: 0.5rem 0;
+      color: #aaa;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .event-date::before {
+      content: "🗓";
+      color: #00c3ff;
+    }
+
+    .event-location {
+      margin: 0.5rem 0 1rem;
+      color: #aaa;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .event-location::before {
+      content: "📍";
+      color: #ff0000;
+    }
+
+    .event-description {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #ddd;
+      margin: 1rem 0;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .events-track:hover {
+      animation-play-state: paused;
+    }
+
+    /* Footer Styles */
+    .site-footer {
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .container {
+        max-width: 95%;
+      padding: 1.5rem;
+      }
+      
+      .event-card {
+        width: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 2rem;
+      }
+      
+      /* Mobile menu styles */
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        gap: 0;
+      }
+      
+      nav ul.show {
+        display: flex;
+      }
+      
+      nav ul li {
+        width: 100%;
+        text-align: center;
+      }
+      
+      nav ul li a {
+        display: block;
+        padding: 0.8rem;
+      }
+      
+      .event-card {
+        width: 260px;
+      }
+      
+      .event-image {
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0.8rem 1rem;
+      }
+      
+      nav .logo {
+        height: 40px;
+      }
+      
+      h2 {
+        font-size: 1.7rem;
+      }
+      
+      .event-card {
+        width: 240px;
+      }
+      
+      .event-content {
+        padding: 1.2rem;
+      }
+      
+      .event-content h3 {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Touch device adjustments */
+    @media (hover: none) {
+      .event-card:hover {
+        transform: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      .event-card:hover::before {
+        opacity: 0;
+      }
+      
+      .event-card:hover .event-image img {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <img src="../assets/logo.png" class="logo" alt="IEEE DYP Logo">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="navMenu">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="contact.html">Contact us</a></li>
+    </ul>
+  </nav>
+
+  <!-- Events Section -->
+  <div class="container">
+    <h2>UPCOMING EVENTS</h2>
+    
+    <div class="events-section">
+      <div class="events-container">
+        <div class="events-track">
+          <!-- Event 1 -->
+          <div class="event-card">
+            <div class="event-image">
+              <img src="../assets/Event_three.jpg" alt="Event 1">
+            </div>
+            <div class="event-content">
+              <h3>TECHNOTSAV</h3>
+              <p>
+                <strong>Venue:</strong> E&TC Department Labs<br>
+                <strong>Date:</strong> 24<sup>th</sup> & 25<sup>th</sup> April 2025 <br>
+                <strong>Time:</strong> 10:00 AM – 4:00 PM<br>
+              </p>
+            </div>
+          </div>
+          
+          
+          <!-- Event 2 -->
+          <div class="event-card">
+            <div class="event-image">
+              <img src="../assets/Event_One.jpeg" alt="Workshop">
+            </div>
+            <div class="event-content">
+              <h3>ROBOSOCCER</h3>
+              <p class="event-date">24 April 2025</p>
+              <p class="event-location">DYPCET LAWN</p>
+              <p class="event-description">A thrilling robot soccer competition testing coordination, speed, and strategy on the field.</p>
+            </div>
+          </div>
+          
+          <!-- Event 3 -->
+          <div class="event-card">
+            <div class="event-image">
+              <img src="../assets/Event_Two.jpeg" alt="Hackathon">
+            </div>
+            <div class="event-content">
+              <h3>PROJECT COMPETITION</h3>
+              <p class="event-date">24 April></p>
+              <p class="event-location">E & TC Department Labs</p>
+              <p class="event-description">24-hour hackathon challenging students to develop innovative solutions for real-world problems.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>&copy; <span id="year"></span> IEEE DYP Student Branch. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Mobile menu toggle
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('show');
+    }
+    
+    // Initialize events carousel
+    document.addEventListener('DOMContentLoaded', function() {
+      const track = document.querySelector('.events-track');
+      const events = document.querySelectorAll('.event-card');
+      
+      // Duplicate events for infinite loop
+      events.forEach(event => {
+        const clone = event.cloneNode(true);
+        track.appendChild(clone);
+      });
+      
+      // Adjust animation duration based on number of cards
+      const totalCards = events.length * 2;
+      const duration = totalCards * 10; // 4 seconds per card
+      track.style.animationDuration = `${duration}s`;
+      
+      // Pause animation when tab is inactive
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          track.style.animationPlayState = 'paused';
+        } else {
+          track.style.animationPlayState = 'running';
+        }
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const track = document.querySelector('.events-track');
+      const cards = document.querySelectorAll('.event-card');
+  
+      cards.forEach(card => {
+        // Desktop: pause on hover, resume on mouse leave
+        card.addEventListener('mouseenter', () => {
+          track.style.animationPlayState = 'paused';
+        });
+  
+        card.addEventListener('mouseleave', () => {
+          track.style.animationPlayState = 'running';
+        });
+  
+        // Mobile: pause on touchstart, resume on touchend or touchcancel
+        card.addEventListener('touchstart', () => {
+          track.style.animationPlayState = 'paused';
+        });
+  
+        card.addEventListener('touchend', () => {
+          track.style.animationPlayState = 'running';
+        });
+  
+        card.addEventListener('touchcancel', () => {
+          track.style.animationPlayState = 'running';
+        });
+      });
+    });
+  </script>
+  
+  
+</body>
+</html>
