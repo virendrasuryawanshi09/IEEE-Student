@@ -67,6 +67,7 @@
       padding: 2rem;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 12px;
+      position: relative;
     }
     
     h2 {
@@ -87,6 +88,7 @@
       left: 0;
       width: 100%;
       height: 3px;
+      background-color: #ff0000;
       transform: scaleX(0.7);
     }
 
@@ -107,23 +109,25 @@
       display: flex;
       gap: 2rem;
       width: max-content;
-      animation: scroll 40s linear infinite;
       padding: 1rem 0;
-      will-change: transform;
+      transition: transform 0.5s ease;
+      transform: translateX(0);
     }
 
     .event-card {
-        width: 90vw; /* takes major width */
-        max-width: 900px;
-        max-height: 900px;
-        margin: 0 auto;
-        background: transparent; /* removed black bg */
-        border-radius: 16px;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        position: relative;
+      width: 90vw;
+      max-width: 900px;
+      max-height: 900px;
+      margin: 0 auto;
+      background: transparent;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      flex-shrink: 0;
     }
+
     .event-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 15px 30px rgba(0, 195, 255, 0.3);
@@ -137,7 +141,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, #00c3ff);
+      background: linear-gradient(90deg, #00c3ff, #ff0000);
       opacity: 0;
       transition: opacity 0.3s;
     }
@@ -147,17 +151,18 @@
     }
 
     .event-image {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-      }
-      
-      .event-image img {
-        width: 100%;
-        height: auto;
-        object-fit: contain; /* Important: show entire image without cutting */
-      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .event-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+    }
 
     .event-card:hover .event-image img {
       transform: scale(1.08);
@@ -168,9 +173,8 @@
     }
 
     .event-content h3 {
-        font-size: 2rem;
+      font-size: 2rem;
       margin: 0 0 0.8rem 0;
-      font-size: 1.3rem;
       color: #00c3ff;
       font-weight: 600;
     }
@@ -210,17 +214,38 @@
       margin: 1rem 0;
     }
 
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+    /* Navigation Arrows */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      border: 2px solid #00c3ff;
+      color: #00c3ff;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      user-select: none;
     }
 
-    .events-track:hover {
-      animation-play-state: paused;
+    .nav-arrow:hover {
+      background: rgba(0, 195, 255, 0.2);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .arrow-left {
+      left: 1rem;
+    }
+
+    .arrow-right {
+      right: 1rem;
     }
 
     /* Footer Styles */
@@ -250,11 +275,13 @@
     @media (max-width: 992px) {
       .container {
         max-width: 95%;
-      padding: 1.5rem;
+        padding: 1.5rem;
       }
       
-      .event-card {
-        width: 280px;
+      .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
       }
     }
 
@@ -263,7 +290,6 @@
         padding: 1rem 2rem;
       }
       
-      /* Mobile menu styles */
       .menu-toggle {
         display: block;
       }
@@ -295,12 +321,10 @@
         padding: 0.8rem;
       }
       
-      .event-card {
-        width: 260px;
-      }
-      
-      .event-image {
-        height: 160px;
+      .nav-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
       }
     }
 
@@ -317,16 +341,18 @@
         font-size: 1.7rem;
       }
       
-      .event-card {
-        width: 240px;
-      }
-      
       .event-content {
         padding: 1.2rem;
       }
       
       .event-content h3 {
-        font-size: 1.1rem;
+        font-size: 1.5rem;
+      }
+      
+      .nav-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
       }
     }
 
@@ -334,8 +360,8 @@
     @media (hover: none) {
       .event-card:hover {
         transform: none;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+        border-color: rgba(255, 255, 255, 0.2);
       }
       
       .event-card:hover::before {
@@ -369,7 +395,11 @@
     
     <div class="events-section">
       <div class="events-container">
-        <div class="events-track">
+        <!-- Navigation Arrows -->
+        <div class="nav-arrow arrow-left" id="arrowLeft">❮</div>
+        <div class="nav-arrow arrow-right" id="arrowRight">❯</div>
+        
+        <div class="events-track" id="eventsTrack">
           <!-- Event 1 -->
           <div class="event-card">
             <div class="event-image">
@@ -384,7 +414,6 @@
               </p>
             </div>
           </div>
-          
           
           <!-- Event 2 -->
           <div class="event-card">
@@ -406,12 +435,11 @@
             </div>
             <div class="event-content">
               <h3>PROJECT COMPETITION</h3>
-              <p class="event-date">24 April></p>
+              <p class="event-date">24 April</p>
               <p class="event-location">E & TC Department Labs</p>
-              <p class="event-description">24-hour hackathon challenging students to develop innovative solutions for real-world problems.</p>
+              <p class="event-description">Showcase your innovative engineering solutions and compete for top honors in this exciting tech expo</p>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -426,70 +454,63 @@
   <script>
     // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
-    
+  
     // Mobile menu toggle
     function toggleMenu() {
       const navMenu = document.getElementById('navMenu');
       navMenu.classList.toggle('show');
     }
-    
+  
     // Initialize events carousel
-    document.addEventListener('DOMContentLoaded', function() {
-      const track = document.querySelector('.events-track');
-      const events = document.querySelectorAll('.event-card');
-      
-      // Duplicate events for infinite loop
-      events.forEach(event => {
-        const clone = event.cloneNode(true);
-        track.appendChild(clone);
-      });
-      
-      // Adjust animation duration based on number of cards
-      const totalCards = events.length * 2;
-      const duration = totalCards * 10; // 4 seconds per card
-      track.style.animationDuration = `${duration}s`;
-      
-      // Pause animation when tab is inactive
-      document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-          track.style.animationPlayState = 'paused';
-        } else {
-          track.style.animationPlayState = 'running';
+    document.addEventListener('DOMContentLoaded', function () {
+      const track = document.getElementById('eventsTrack');
+      const cards = document.querySelectorAll('.event-card');
+      const arrowLeft = document.getElementById('arrowLeft');
+      const arrowRight = document.getElementById('arrowRight');
+  
+      let currentIndex = 0;
+  
+      // Hide left arrow initially
+      arrowLeft.style.display = 'none';
+  
+      function centerCard(index) {
+        const container = document.querySelector('.events-container');
+        const containerWidth = container.offsetWidth;
+        const card = cards[index];
+        const cardWidth = card.offsetWidth;
+        const cardOffsetLeft = card.offsetLeft;
+  
+        const offset = cardOffsetLeft - (containerWidth / 2 - cardWidth / 2);
+        track.style.transform = `translateX(-${offset}px)`;
+  
+        // Arrow visibility
+        arrowLeft.style.display = index > 0 ? 'flex' : 'none';
+        arrowRight.style.display = index < cards.length - 1 ? 'flex' : 'none';
+      }
+  
+      arrowLeft.addEventListener('click', function () {
+        if (currentIndex > 0) {
+          currentIndex--;
+          centerCard(currentIndex);
         }
       });
-    });
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const track = document.querySelector('.events-track');
-      const cards = document.querySelectorAll('.event-card');
   
-      cards.forEach(card => {
-        // Desktop: pause on hover, resume on mouse leave
-        card.addEventListener('mouseenter', () => {
-          track.style.animationPlayState = 'paused';
-        });
-  
-        card.addEventListener('mouseleave', () => {
-          track.style.animationPlayState = 'running';
-        });
-  
-        // Mobile: pause on touchstart, resume on touchend or touchcancel
-        card.addEventListener('touchstart', () => {
-          track.style.animationPlayState = 'paused';
-        });
-  
-        card.addEventListener('touchend', () => {
-          track.style.animationPlayState = 'running';
-        });
-  
-        card.addEventListener('touchcancel', () => {
-          track.style.animationPlayState = 'running';
-        });
+      arrowRight.addEventListener('click', function () {
+        if (currentIndex < cards.length - 1) {
+          currentIndex++;
+          centerCard(currentIndex);
+        }
       });
+  
+      // Handle window resize
+      window.addEventListener('resize', function () {
+        centerCard(currentIndex);
+      });
+  
+      // Initial centering
+      centerCard(currentIndex);
     });
   </script>
-  
   
 </body>
 </html>
