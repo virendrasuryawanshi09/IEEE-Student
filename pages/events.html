@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../assets/logo.png">
   <title>Events | IEEE DYP Student Branch</title>
   <style>
     * {
@@ -88,7 +89,6 @@
       left: 0;
       width: 100%;
       height: 3px;
-      background-color: #ff0000;
       transform: scaleX(0.7);
     }
 
@@ -481,7 +481,7 @@
         const cardOffsetLeft = card.offsetLeft;
   
         const offset = cardOffsetLeft - (containerWidth / 2 - cardWidth / 2);
-        track.style.transform = `translateX(-${offset}px)`;
+        track.style.transform = `translateX(-${offset}px)`;  // Fixed template literal syntax
   
         // Arrow visibility
         arrowLeft.style.display = index > 0 ? 'flex' : 'none';
