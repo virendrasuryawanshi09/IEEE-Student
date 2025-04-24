@@ -11,7 +11,6 @@
         :root {
             --primary-color: #00629b;
             --secondary-color: #00c3ff;
-            --accent-color: #ff6b6b;
             --dark-color: #0a192f;
             --light-color: #f8f9fa;
             --overlay-dark: rgba(10, 25, 47, 0.85);
@@ -182,7 +181,7 @@
             display: block;
             width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
             margin: 15px auto;
             border-radius: 3px;
         }
@@ -228,7 +227,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 195, 255, 0.1), rgba(255, 107, 107, 0.1));
+            background: linear-gradient(135deg, rgba(0, 195, 255, 0.1), rgba(0, 98, 155, 0.1));
             z-index: -1;
             opacity: 0;
             transition: opacity 0.4s;
@@ -261,7 +260,7 @@
             bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
             border-radius: 3px;
             transition: width 0.3s;
         }
@@ -280,24 +279,19 @@
             font-size: 0.9rem;
         }
 
-        .team-member .initials {
-            width: 120px;
-            height: 120px;
+        .team-member .photo {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
+            object-fit: cover;
+            margin: 0 20px;
+            border: 3px solid var(--secondary-color);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.4s;
         }
 
-        .team-member:hover .initials {
-            transform: scale(1.1) rotate(5deg);
+        .team-member:hover .photo {
+            transform: scale(1.1);
             box-shadow: 0 8px 25px rgba(0, 195, 255, 0.4);
         }
 
@@ -366,10 +360,9 @@
                 padding: 25px 20px;
             }
 
-            .team-member .initials {
-                width: 100px;
-                height: 100px;
-                font-size: 2.5rem;
+            .team-member .photo {
+                width: 120px;
+                height: 120px;
             }
         }
 
@@ -385,6 +378,11 @@
 
             .team-member {
                 padding: 20px 15px;
+            }
+            
+            .team-member .photo {
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
@@ -418,17 +416,17 @@
     <p class="section-subtitle">Our dedicated faculty members who guide and support the IEEE student branch</p>
     <div class="team-container">
         <div class="team-member">
-            <div class="initials">SC</div>
+            <img src="../assets/team/faculty1.jpg" class="photo" alt="Dr. Santosh Chede">
             <div class="name">Dr. Santosh Chede</div>
             <div class="role">Faculty Advisor</div>
         </div>
         <div class="team-member">
-            <div class="initials">MB</div>
+            <img src="../assets/MVB.jpeg" class="photo" alt="Dr. Manisha Bhanuse">
             <div class="name">Dr. Manisha Bhanuse</div>
             <div class="role">Faculty Advisor</div>
         </div>
         <div class="team-member">
-            <div class="initials">SB</div>
+            <img src="../assets/team/faculty3.jpg" class="photo" alt="Dr. Santosh Bhopale">
             <div class="name">Dr. Santosh Bhopale</div>
             <div class="role">Faculty Advisor</div>
         </div>
@@ -439,42 +437,42 @@
     <p class="section-subtitle">The passionate students who drive the IEEE student branch activities</p>
     <div class="team-container">
         <div class="team-member">
-            <div class="initials">PP</div>
+            <img src="../assets/Padmanish.jpeg" class="photo" alt="Padmanish Patil">
             <div class="name">Padmanish Patil</div>
             <div class="role">Chair</div>
         </div>
         <div class="team-member">
-            <div class="initials">AT</div>
+            <img src="../assets/Akshay.png" class="photo" alt="Akshay Talwekar">
             <div class="name">Akshay Talwekar</div>
             <div class="role">Secretary</div>
         </div>
         <div class="team-member">
-            <div class="initials">SS</div>
+            <img src="../assets/Shoyab.jpg" class="photo" alt="Shoyab Shaikh">
             <div class="name">Shoyab Shaikh</div>
             <div class="role">Joint Secretary</div>
         </div>
         <div class="team-member">
-            <div class="initials">DP</div>
+            <img src="../assets/Diksha.jpeg" class="photo" alt="Diksha Patil">
             <div class="name">Diksha Patil</div>
             <div class="role">Vice Chair</div>
         </div>
         <div class="team-member">
-            <div class="initials">VS</div>
+            <img src="../assets/Virendra.jpeg" class="photo" alt="Virendra Suryawanshi">
             <div class="name">Virendra Suryawanshi</div>
             <div class="role">Webmaster</div>
         </div>
         <div class="team-member">
-            <div class="initials">MT</div>
+            <img src="../assets/Mukta.jpeg" class="photo" alt="Mukta Tamhankar">
             <div class="name">Mukta Tamhankar</div>
             <div class="role">Treasurer</div>
         </div>
         <div class="team-member">
-            <div class="initials">TS</div>
+            <img src="../assets/team/joint-treasurer.jpg" class="photo" alt="Tufailahamad Sayyad">
             <div class="name">Tufailahamad Sayyad</div>
             <div class="role">Joint Treasurer</div>
         </div>
         <div class="team-member">
-            <div class="initials">SP</div>
+            <img src="../assets/team/social-media.jpg" class="photo" alt="Sanika Patil">
             <div class="name">Sanika Patil</div>
             <div class="role">Social Media Coordinator</div>
         </div>
